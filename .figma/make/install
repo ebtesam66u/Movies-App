@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+npm ci --legacy-peer-deps
+exec npm install --no-save --legacy-peer-deps chart.js@^4.4.0
