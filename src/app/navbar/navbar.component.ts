@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { MoviedataService } from '../moviedata.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,15 @@ export class NavbarComponent implements AfterViewInit ,OnInit{
  searchKey:string=""; 
  loading:boolean=false;
  noSearch:boolean=true;
- constructor(private _moviedataService:MoviedataService){}
+ constructor(
+  private _moviedataService:MoviedataService,
+  private router:Router
+ ){}
 @ViewChild('nav') myIdentifier: ElementRef ={} as ElementRef;
 hieght:number=0;
+get isHomePage(): boolean {
+  return this.router.url === '/Home';
+}
 ngOnInit(): void {
     this._moviedataService.loading.subscribe({
       next:(value)=>{
